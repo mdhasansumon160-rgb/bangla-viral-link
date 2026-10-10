@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bangla Viral Link</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #101010;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background: #202020;
+    padding: 18px;
+    text-align: center;
+}
+
+header h1 {
+    color: #ff3030;
+    margin: 0;
+}
+
+header p {
+    margin-bottom: 0;
+}
+
+.search {
+    padding: 15px;
+    text-align: center;
+}
+
+.search input {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+}
+
+.container {
+    padding: 15px;
+}
+
+.videos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.card {
+    background: #242424;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.thumbnail {
+    background: #383838;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    border-radius: 8px;
+}
+
+.card h3 {
+    font-size: 15px;
+}
+
+.card p {
+    color: #bbb;
+    font-size: 12px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #aaa;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🎬 Bangla Viral Link</h1>
+    <p>বাংলা ভিডিওর দুনিয়ায় স্বাগতম!</p>
+</header>
+
+<div class="search">
+    <input
+        type="text"
+        id="search"
+        placeholder="ভিডিও খুঁজুন..."
+        oninput="searchVideos()"
+    >
+</div>
+
+<div class="container">
+    <h2>🔥 জনপ্রিয় ভিডিও</h2>
+
+    <div class="videos">
+
+        <div class="card">
+            <div class="thumbnail">▶️</div>
+            <h3>আমার প্রথম ভিডিও</h3>
+            <p>Bangla Viral Link</p>
+        </div>
+
+        <div class="card">
+            <div class="thumbnail">🎬</div>
+            <h3>বাংলা বিনোদন</h3>
+            <p>Bangla Viral Link</p>
+        </div>
+
+        <div class="card">
+            <div class="thumbnail">📱</div>
+            <h3>টেকনোলজি ভিডিও</h3>
+            <p>Bangla Viral Link</p>
+        </div>
+
+        <div class="card">
+            <div class="thumbnail">🌍</div>
+            <h3>ভাইরাল ভিডিও</h3>
+            <p>Bangla Viral Link</p>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    © 2026 Bangla Viral Link
+</footer>
+
+<script>
+function searchVideos() {
+    const query = document.getElementById("search")
+        .value.toLowerCase();
+
+    document.querySelectorAll(".card").forEach(card => {
+        card.style.display =
+            card.innerText.toLowerCase().includes(query)
+            ? ""
+            : "none";
+    });
+}
+</script>
+
+</body>
+  </html>
