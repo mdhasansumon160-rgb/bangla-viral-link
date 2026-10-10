@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Bangla Viral Link</title>
 
 <style>
@@ -19,71 +20,93 @@ body {
 
 header {
     background: #202020;
-    padding: 18px;
     text-align: center;
+    padding: 25px 10px;
 }
 
 header h1 {
     color: #ff3030;
     margin: 0;
+    font-size: 30px;
 }
 
 header p {
     margin-bottom: 0;
+    font-size: 17px;
 }
 
 .search {
-    padding: 15px;
-    text-align: center;
-}
-
-.search input {
-    width: 100%;
-    max-width: 500px;
-    padding: 12px;
-    border-radius: 8px;
+    display: block;
+    width: 94%;
+    margin: 20px auto;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 10px;
     border: none;
 }
 
-.container {
-    padding: 15px;
+h2 {
+    margin: 30px 18px 18px;
 }
 
 .videos {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    gap: 14px;
+    padding: 12px;
 }
 
 .card {
     background: #242424;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 12px;
+    border-radius: 12px;
+    min-width: 0;
 }
 
-.thumbnail {
-    background: #383838;
-    height: 110px;
+.card a {
+    color: white;
+    text-decoration: none;
+}
+
+.thumb {
+    background: #363636;
+    height: 125px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 40px;
+    justify-content: center;
     border-radius: 8px;
+    font-size: 48px;
 }
 
 .card h3 {
-    font-size: 15px;
+    font-size: 16px;
+    overflow-wrap: anywhere;
 }
 
 .card p {
-    color: #bbb;
-    font-size: 12px;
+    color: #aaa;
+    font-size: 13px;
+}
+
+.watch {
+    display: inline-block;
+    background: #ff3030;
+    padding: 9px 12px;
+    border-radius: 6px;
+    margin-bottom: 5px;
+    font-size: 14px;
 }
 
 footer {
     text-align: center;
-    padding: 20px;
-    color: #aaa;
+    padding: 25px;
+    color: #999;
+}
+
+@media (max-width: 350px) {
+    .videos {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 </head>
@@ -95,64 +118,99 @@ footer {
     <p>বাংলা ভিডিওর দুনিয়ায় স্বাগতম!</p>
 </header>
 
-<div class="search">
-    <input
-        type="text"
-        id="search"
-        placeholder="ভিডিও খুঁজুন..."
-        oninput="searchVideos()"
-    >
-</div>
+<input
+    class="search"
+    id="search"
+    type="search"
+    placeholder="ভিডিও খুঁজুন..."
+>
 
-<div class="container">
-    <h2>🔥 জনপ্রিয় ভিডিও</h2>
+<h2>🔥 জনপ্রিয় ভিডিও</h2>
 
-    <div class="videos">
-
-        <div class="card">
-            <div class="thumbnail">▶️</div>
-            <h3>আমার প্রথম ভিডিও</h3>
-            <p>Bangla Viral Link</p>
-        </div>
-
-        <div class="card">
-            <div class="thumbnail">🎬</div>
-            <h3>বাংলা বিনোদন</h3>
-            <p>Bangla Viral Link</p>
-        </div>
-
-        <div class="card">
-            <div class="thumbnail">📱</div>
-            <h3>টেকনোলজি ভিডিও</h3>
-            <p>Bangla Viral Link</p>
-        </div>
-
-        <div class="card">
-            <div class="thumbnail">🌍</div>
-            <h3>ভাইরাল ভিডিও</h3>
-            <p>Bangla Viral Link</p>
-        </div>
-
-    </div>
-</div>
+<div class="videos" id="videos"></div>
 
 <footer>
     © 2026 Bangla Viral Link
 </footer>
 
 <script>
-function searchVideos() {
-    const query = document.getElementById("search")
-        .value.toLowerCase();
 
-    document.querySelectorAll(".card").forEach(card => {
-        card.style.display =
-            card.innerText.toLowerCase().includes(query)
-            ? ""
-            : "none";
+// নতুন ভিডিও যোগ করতে নিচের তালিকায়
+// ভিডিওর নাম ও লিংক লিখবে।
+
+const videoList = [
+    {
+        title: "আমার প্রথম ভিডিও",
+        url: "https://www.youtube.com/",
+        icon: "▶️"
+    },
+    {
+        title: "বাংলা বিনোদন",
+        url: "https://www.youtube.com/",
+        icon: "🎬"
+    },
+    {
+        title: "টেকনোলজি ভিডিও",
+        url: "https://www.youtube.com/",
+        icon: "📱"
+    },
+    {
+        title: "ভাইরাল ভিডিও",
+        url: "https://www.youtube.com/",
+        icon: "🌍"
+    }
+];
+
+const container = document.getElementById("videos");
+const search = document.getElementById("search");
+
+function showVideos() {
+    const keyword = search.value.toLowerCase();
+
+    const filtered = videoList.filter(video =>
+        video.title.toLowerCase().includes(keyword)
+    );
+
+    container.replaceChildren();
+
+    filtered.forEach(video => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const link = document.createElement("a");
+        link.href = video.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+
+        const thumb = document.createElement("div");
+        thumb.className = "thumb";
+        thumb.textContent = video.icon;
+
+        const title = document.createElement("h3");
+        title.textContent = video.title;
+
+        const source = document.createElement("p");
+        source.textContent = "Bangla Viral Link";
+
+        const button = document.createElement("span");
+        button.className = "watch";
+        button.textContent = "▶ ভিডিও দেখুন";
+
+        link.append(thumb, title, source, button);
+        card.appendChild(link);
+        container.appendChild(card);
     });
+
+    if (filtered.length === 0) {
+        container.textContent = "কোনো ভিডিও পাওয়া যায়নি।";
+    }
 }
+
+search.addEventListener("input", showVideos);
+
+showVideos();
+
 </script>
 
 </body>
-  </html>
+    </html>
